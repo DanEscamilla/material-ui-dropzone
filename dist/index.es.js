@@ -406,13 +406,14 @@ var DropzoneAreaBase = /*#__PURE__*/function (_React$PureComponent) {
 
     _this.handleDropAccepted = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(acceptedFiles, evt) {
-        var _this$props, fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onAdd, onDrop, message;
+        var _this$props, fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onDrop, message;
 
         return _regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this$props = _this.props, fileObjects = _this$props.fileObjects, filesLimit = _this$props.filesLimit, getFileAddedMessage = _this$props.getFileAddedMessage, getFileLimitExceedMessage = _this$props.getFileLimitExceedMessage, onAdd = _this$props.onAdd, onDrop = _this$props.onDrop;
+                // const {fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onAdd, onDrop} = this.props;
+                _this$props = _this.props, fileObjects = _this$props.fileObjects, filesLimit = _this$props.filesLimit, getFileAddedMessage = _this$props.getFileAddedMessage, getFileLimitExceedMessage = _this$props.getFileLimitExceedMessage, onDrop = _this$props.onDrop;
 
                 if (!(filesLimit > 1 && fileObjects.length + acceptedFiles.length > filesLimit)) {
                   _context.next = 4;
@@ -449,8 +450,8 @@ var DropzoneAreaBase = /*#__PURE__*/function (_React$PureComponent) {
                 // Display message
 
 
-                message = fileObjs.reduce(function (msg, fileObj) {
-                  return msg + getFileAddedMessage(fileObj.file.name);
+                message = acceptedFiles.reduce(function (msg, file) {
+                  return msg + getFileAddedMessage(file.name);
                 }, '');
 
                 _this.setState({
@@ -957,7 +958,7 @@ var DropzoneArea = /*#__PURE__*/function (_React$PureComponent) {
               _context2.next = 4;
               return Promise.all(initialFiles.map( /*#__PURE__*/function () {
                 var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(initialFile) {
-                  var file, data;
+                  var file;
                   return _regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                       switch (_context.prev = _context.next) {
@@ -979,17 +980,9 @@ var DropzoneArea = /*#__PURE__*/function (_React$PureComponent) {
                           file = initialFile;
 
                         case 7:
-                          _context.next = 9;
-                          return readFile(file);
+                          return _context.abrupt("return", file);
 
-                        case 9:
-                          data = _context.sent;
-                          return _context.abrupt("return", {
-                            file: file,
-                            data: data
-                          });
-
-                        case 11:
+                        case 8:
                         case "end":
                           return _context.stop();
                       }
