@@ -8,7 +8,8 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import {Fragment} from 'react';
 import Dropzone from 'react-dropzone';
-import {convertBytesToMbsOrKbs, isImage, readFile} from '../helpers';
+import {convertBytesToMbsOrKbs, isImage} from '../helpers';
+// import {convertBytesToMbsOrKbs, isImage, readFile} from '../helpers';
 import PreviewList from './PreviewList';
 import SnackbarContentWrapper from './SnackbarContentWrapper';
 
@@ -96,7 +97,8 @@ class DropzoneAreaBase extends React.PureComponent {
     }
 
     handleDropAccepted = async(acceptedFiles, evt) => {
-        const {fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onAdd, onDrop} = this.props;
+        // const {fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onAdd, onDrop} = this.props;
+        const {fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onDrop} = this.props;
 
         if (filesLimit > 1 && fileObjects.length + acceptedFiles.length > filesLimit) {
             this.setState({
@@ -112,24 +114,24 @@ class DropzoneAreaBase extends React.PureComponent {
             onDrop(acceptedFiles, evt);
         }
 
-        // Retrieve fileObjects data
-        const fileObjs = await Promise.all(
-            acceptedFiles.map(async(file) => {
-                const data = await readFile(file);
-                return {
-                    file,
-                    data,
-                };
-            })
-        );
-
-        // Notify added files
-        if (onAdd) {
-            onAdd(fileObjs);
-        }
+        // // Retrieve fileObjects data
+        // const fileObjs = await Promise.all(
+        //     acceptedFiles.map(async(file) => {
+        //         const data = await readFile(file);
+        //         return {
+        //             file,
+        //             data,
+        //         };
+        //     })
+        // );
+        //
+        // // Notify added files
+        // if (onAdd) {
+        //     onAdd(fileObjs);
+        // }
 
         // Display message
-        const message = fileObjs.reduce((msg, fileObj) => msg + getFileAddedMessage(fileObj.file.name), '');
+        const message = acceptedFiles.reduce((msg, file) => msg + getFileAddedMessage(file.name), '');
         this.setState({
             openSnackBar: true,
             snackbarMessage: message,

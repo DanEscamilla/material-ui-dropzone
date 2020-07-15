@@ -411,17 +411,17 @@ var DropzoneAreaBase = /*#__PURE__*/function (_React$PureComponent) {
     };
 
     _this.handleDropAccepted = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2(acceptedFiles, evt) {
-        var _this$props, fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onAdd, onDrop, fileObjs, message;
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(acceptedFiles, evt) {
+        var _this$props, fileObjects, filesLimit, getFileAddedMessage, getFileLimitExceedMessage, onAdd, onDrop, message;
 
-        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return _regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
                 _this$props = _this.props, fileObjects = _this$props.fileObjects, filesLimit = _this$props.filesLimit, getFileAddedMessage = _this$props.getFileAddedMessage, getFileLimitExceedMessage = _this$props.getFileLimitExceedMessage, onAdd = _this$props.onAdd, onDrop = _this$props.onDrop;
 
                 if (!(filesLimit > 1 && fileObjects.length + acceptedFiles.length > filesLimit)) {
-                  _context2.next = 4;
+                  _context.next = 4;
                   break;
                 }
 
@@ -431,53 +431,28 @@ var DropzoneAreaBase = /*#__PURE__*/function (_React$PureComponent) {
                   snackbarVariant: 'error'
                 }, _this.notifyAlert);
 
-                return _context2.abrupt("return");
+                return _context.abrupt("return");
 
               case 4:
                 // Notify Drop event
                 if (onDrop) {
                   onDrop(acceptedFiles, evt);
-                } // Retrieve fileObjects data
-
-
-                _context2.next = 7;
-                return Promise.all(acceptedFiles.map( /*#__PURE__*/function () {
-                  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(file) {
-                    var data;
-                    return _regeneratorRuntime.wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            _context.next = 2;
-                            return readFile(file);
-
-                          case 2:
-                            data = _context.sent;
-                            return _context.abrupt("return", {
-                              file: file,
-                              data: data
-                            });
-
-                          case 4:
-                          case "end":
-                            return _context.stop();
-                        }
-                      }
-                    }, _callee);
-                  }));
-
-                  return function (_x3) {
-                    return _ref3.apply(this, arguments);
-                  };
-                }()));
-
-              case 7:
-                fileObjs = _context2.sent;
-
-                // Notify added files
-                if (onAdd) {
-                  onAdd(fileObjs);
-                } // Display message
+                } // // Retrieve fileObjects data
+                // const fileObjs = await Promise.all(
+                //     acceptedFiles.map(async(file) => {
+                //         const data = await readFile(file);
+                //         return {
+                //             file,
+                //             data,
+                //         };
+                //     })
+                // );
+                //
+                // // Notify added files
+                // if (onAdd) {
+                //     onAdd(fileObjs);
+                // }
+                // Display message
 
 
                 message = fileObjs.reduce(function (msg, fileObj) {
@@ -490,12 +465,12 @@ var DropzoneAreaBase = /*#__PURE__*/function (_React$PureComponent) {
                   snackbarVariant: 'success'
                 }, _this.notifyAlert);
 
-              case 11:
+              case 7:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2);
+        }, _callee);
       }));
 
       return function (_x, _x2) {
@@ -620,11 +595,11 @@ var DropzoneAreaBase = /*#__PURE__*/function (_React$PureComponent) {
         onDropRejected: this.handleDropRejected,
         maxSize: maxFileSize,
         multiple: isMultiple
-      }), function (_ref4) {
-        var getRootProps = _ref4.getRootProps,
-            getInputProps = _ref4.getInputProps,
-            isDragActive = _ref4.isDragActive,
-            isDragReject = _ref4.isDragReject;
+      }), function (_ref3) {
+        var getRootProps = _ref3.getRootProps,
+            getInputProps = _ref3.getInputProps,
+            isDragActive = _ref3.isDragActive,
+            isDragReject = _ref3.isDragReject;
         return /*#__PURE__*/React.createElement("div", _extends({}, getRootProps(), {
           className: clsx(classes.root, dropzoneClass, isDragActive && classes.active, !disableRejectionFeedback && isDragReject && classes.invalid)
         }), /*#__PURE__*/React.createElement("input", _extends({}, inputProps, getInputProps())), /*#__PURE__*/React.createElement("div", {

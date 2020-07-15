@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
 
-import {createFileFromUrl, readFile} from '../helpers';
+import {createFileFromUrl} from '../helpers';
+// import {createFileFromUrl, readFile} from '../helpers';
 
 import DropzoneAreaBase from './DropzoneAreaBase';
 
@@ -56,12 +57,13 @@ class DropzoneArea extends React.PureComponent {
                     } else {
                         file = initialFile;
                     }
-                    const data = await readFile(file);
+                    return file;
+                    // const data = await readFile(file);
 
-                    return {
-                        file,
-                        data,
-                    };
+                    // return {
+                    //     file,
+                    //     data,
+                    // };
                 })
             );
 
